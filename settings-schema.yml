@@ -1,0 +1,20 @@
+{
+    gitlab: {
+        type: "dict",
+        schema: {
+            url: {
+                type: "string",
+                required: true,
+            },
+            token: {
+                type: "string",
+                required: true,
+            },
+            secret: {
+                type: "string",
+                required: true,
+            },
+        },
+
+    },
+}
