@@ -1,8 +1,9 @@
 import gitlab
 
+from typing import Dict
 from src.setup import get_settings
 
-def get_signature(project_id: str, commit_id: str):
+def get_signature(project_id: str, commit_id: str) -> Dict[str, any]:
     glSettings = get_settings()['gitlab']
 
 

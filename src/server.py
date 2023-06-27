@@ -72,15 +72,11 @@ class HookResource:
                     description=f'No signature found for commit {push_commit["id"]}'
                 )
 
-        # TODO: check if this is needed
-        # if not req.get_header('X-Gitlab-Token') == get_settings()['gitlabToken']:
-        #     raise falcon.HTTPUnauthorized(
-        #         title='Unauthorized',
-        #         description='Invalid X-Gitlab-Token header'
-        #     )
+            if signature['verification_status'] != 'verified':
+                print(
+                    f'Found signature, but it is not verified: {signature["verification_status"]}')
 
-        # check is the commit is signed
-        # TODO: first check if this information is in the payload
+        print(f'All {len(body["commits"])} commits have a verified signature')
 
         resp.status = falcon.HTTP_200
 
