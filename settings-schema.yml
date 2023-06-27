@@ -15,6 +15,64 @@
                 required: true,
             },
         },
-
+    },
+    keycloak: {
+        type: "dict",
+        schema: {
+            url: {
+                type: "string",
+                required: true,
+            },
+            realm: {
+                type: "string",
+                required: true,
+            },
+            username: {
+                type: "string",
+                required: true,
+            },
+            password: {
+                type: "string",
+                required: true,
+            },
+        },
+    },
+    db: {
+        type: "dict",
+        schema: {
+            host: {
+                type: "string",
+                required: true,
+            },
+            username: {
+                type: "string",
+                required: true,
+            },
+            password: {
+                type: "string",
+                required: true,
+            }
+        },
+    },
+    registry: {
+        type: "dict",
+        schema: {
+            url: {
+                type: "string",
+                required: true,
+            },
+            project: {
+                type: "string",
+                required: true,
+            },
+            username: {
+                type: "string",
+                required: true,
+            },
+            password: {
+                type: "string",
+                required: true,
+            }
+        },
     },
 }

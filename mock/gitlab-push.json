@@ -1,67 +1,67 @@
 {
-  "object_kind":"push",
-  "event_name":"push",
-  "before":"ecb9ff44aa0",
-  "after":"fa61658291900e59df0",
-  "ref":"refs/heads/my_branch_name",
-  "checkout_sha":"fa61658291900e59df0",
-  "message":null,
-  "user_id":220253,
-  "user_name":"JRichardsz",
-  "user_username":"Richardsz",
-  "user_email":"",
-  "user_avatar":"https://assets.gitlab-static.net/uploads/-/system/user/avatar/220253/agente3.png",
-  "project_id":14796876,
-  "project":{
-     "id":14796876,
-     "name":"gitlab_repository",
-     "description":"",
-     "web_url":"https://gitlab.com/Richardsz/gitlab_repository",
-     "avatar_url":null,
-     "git_ssh_url":"git@gitlab.com:Richardsz/gitlab_repository.git",
-     "git_http_url":"https://gitlab.com/Richardsz/gitlab_repository.git",
-     "namespace":"JRichardsz",
-     "visibility_level":20,
-     "path_with_namespace":"Richardsz/gitlab_repository",
-     "default_branch":"master",
-     "ci_config_path":null,
-     "homepage":"https://gitlab.com/Richardsz/gitlab_repository",
-     "url":"git@gitlab.com:Richardsz/gitlab_repository.git",
-     "ssh_url":"git@gitlab.com:Richardsz/gitlab_repository.git",
-     "http_url":"https://gitlab.com/Richardsz/gitlab_repository.git"
-  },
-  "commits":[
+   "object_kind": "push",
+   "event_name": "push",
+   "before": "bd3258dfebf654264b6593c1209e6ff9e189c809",
+   "after": "141008624de64abc07fdc8db62fe4d65bec83c1d",
+   "ref": "refs/heads/main",
+   "checkout_sha": "141008624de64abc07fdc8db62fe4d65bec83c1d",
+   "message": null,
+   "user_id": 4,
+   "user_name": "Pierre Le Fevre",
+   "user_username": "pierrelf",
+   "user_email": null,
+   "user_avatar": "https://secure.gravatar.com/avatar/dd6ffed34e555d1c74bd96e5c893e45c?s=80&d=identicon",
+   "project_id": 4,
+   "project": {
+     "id": 4,
+     "name": "Machine Learning",
+     "description": null,
+     "web_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning",
+     "avatar_url": null,
+     "git_ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
+     "git_http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning.git",
+     "namespace": "Pierre Le Fevre",
+     "visibility_level": 0,
+     "path_with_namespace": "pierrelf/machine-learning",
+     "default_branch": "main",
+     "ci_config_path": null,
+     "homepage": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning",
+     "url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
+     "ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
+     "http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning.git"
+   },
+   "commits": [
      {
-        "id":"fa61658291900e59df0",
-        "message":"Update README.md",
-        "timestamp":"2019-10-13T16:44:05Z",
-        "url":"https://gitlab.com/Richardsz/gitlab_repository/commit/fa61658291900e59df0",
-        "author":{
-           "name":"JRichardsz",
-           "email":"jrichardsz.java@gmail.com"
-        },
-        "added":[
-           
-        ],
-        "modified":[
-           "README.md"
-        ],
-        "removed":[
-           
-        ]
+       "id": "141008624de64abc07fdc8db62fe4d65bec83c1d",
+       "message": "bump\n",
+       "title": "bump",
+       "timestamp": "2023-06-27T14:00:04+02:00",
+       "url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning/-/commit/141008624de64abc07fdc8db62fe4d65bec83c1d",
+       "author": {
+         "name": "Pierre Le Fevre",
+         "email": "[REDACTED]"
+       },
+       "added": [
+ 
+       ],
+       "modified": [
+         "version"
+       ],
+       "removed": [
+ 
+       ]
      }
-  ],
-  "total_commits_count":1,
-  "push_options":{
-     
-  },
-  "repository":{
-     "name":"gitlab_repository",
-     "url":"git@gitlab.com:Richardsz/gitlab_repository.git",
-     "description":"",
-     "homepage":"https://gitlab.com/Richardsz/gitlab_repository",
-     "git_http_url":"https://gitlab.com/Richardsz/gitlab_repository.git",
-     "git_ssh_url":"git@gitlab.com:Richardsz/gitlab_repository.git",
-     "visibility_level":20
-  }
-}
+   ],
+   "total_commits_count": 1,
+   "push_options": {
+   },
+   "repository": {
+     "name": "Machine Learning",
+     "url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
+     "description": null,
+     "homepage": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning",
+     "git_http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning.git",
+     "git_ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
+     "visibility_level": 0
+   }
+ }

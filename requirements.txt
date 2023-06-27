@@ -1,3 +1,8 @@
 falcon >= 3.1.1
 cerberus >= 1.3.4
 python-gitlab
+python-keycloak
+mysql-connector-python
+kubernetes
+docker
+git-python
