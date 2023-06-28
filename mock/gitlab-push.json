@@ -1,67 +1,67 @@
 {
-   "object_kind": "push",
-   "event_name": "push",
-   "before": "bd3258dfebf654264b6593c1209e6ff9e189c809",
-   "after": "141008624de64abc07fdc8db62fe4d65bec83c1d",
-   "ref": "refs/heads/main",
-   "checkout_sha": "141008624de64abc07fdc8db62fe4d65bec83c1d",
-   "message": null,
-   "user_id": 4,
-   "user_name": "Pierre Le Fevre",
-   "user_username": "pierrelf",
-   "user_email": null,
-   "user_avatar": "https://secure.gravatar.com/avatar/dd6ffed34e555d1c74bd96e5c893e45c?s=80&d=identicon",
-   "project_id": 4,
-   "project": {
-     "id": 4,
-     "name": "Machine Learning",
-     "description": null,
-     "web_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning",
-     "avatar_url": null,
-     "git_ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
-     "git_http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning.git",
-     "namespace": "Pierre Le Fevre",
-     "visibility_level": 0,
-     "path_with_namespace": "pierrelf/machine-learning",
-     "default_branch": "main",
-     "ci_config_path": null,
-     "homepage": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning",
-     "url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
-     "ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
-     "http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning.git"
-   },
-   "commits": [
-     {
-       "id": "141008624de64abc07fdc8db62fe4d65bec83c1d",
-       "message": "bump\n",
-       "title": "bump",
-       "timestamp": "2023-06-27T14:00:04+02:00",
-       "url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning/-/commit/141008624de64abc07fdc8db62fe4d65bec83c1d",
-       "author": {
-         "name": "Pierre Le Fevre",
-         "email": "[REDACTED]"
-       },
-       "added": [
- 
-       ],
-       "modified": [
-         "version"
-       ],
-       "removed": [
- 
-       ]
-     }
-   ],
-   "total_commits_count": 1,
-   "push_options": {
-   },
-   "repository": {
-     "name": "Machine Learning",
-     "url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
-     "description": null,
-     "homepage": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning",
-     "git_http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/machine-learning.git",
-     "git_ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/machine-learning.git",
-     "visibility_level": 0
-   }
- }
+  "object_kind": "push",
+  "event_name": "push",
+  "before": "4f58cb535543c366e366edd6d3e909448e4d7761",
+  "after": "a4e59d0548678b31eefd3a87e0c38555b6ae29fb",
+  "ref": "refs/heads/main",
+  "checkout_sha": "a4e59d0548678b31eefd3a87e0c38555b6ae29fb",
+  "message": null,
+  "user_id": 4,
+  "user_name": "Pierre Le Fevre",
+  "user_username": "pierrelf",
+  "user_email": null,
+  "user_avatar": "https://secure.gravatar.com/avatar/dd6ffed34e555d1c74bd96e5c893e45c?s=80&d=identicon",
+  "project_id": 6,
+  "project": {
+    "id": 6,
+    "name": "small-docker",
+    "description": null,
+    "web_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker",
+    "avatar_url": null,
+    "git_ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/small-docker.git",
+    "git_http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker.git",
+    "namespace": "Pierre Le Fevre",
+    "visibility_level": 0,
+    "path_with_namespace": "pierrelf/small-docker",
+    "default_branch": "main",
+    "ci_config_path": null,
+    "homepage": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker",
+    "url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/small-docker.git",
+    "ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/small-docker.git",
+    "http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker.git"
+  },
+  "commits": [
+    {
+      "id": "a4e59d0548678b31eefd3a87e0c38555b6ae29fb",
+      "message": "Add runfor metadata\n",
+      "title": "Add runfor metadata",
+      "timestamp": "2023-06-28T10:43:30+02:00",
+      "url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker/-/commit/a4e59d0548678b31eefd3a87e0c38555b6ae29fb",
+      "author": {
+        "name": "Pierre Le Fevre",
+        "email": "[REDACTED]"
+      },
+      "added": [
+        "secd.yml"
+      ],
+      "modified": [
+
+      ],
+      "removed": [
+
+      ]
+    }
+  ],
+  "total_commits_count": 1,
+  "push_options": {
+  },
+  "repository": {
+    "name": "small-docker",
+    "url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/small-docker.git",
+    "description": null,
+    "homepage": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker",
+    "git_http_url": "https://gitlab.sec.cloud.cbh.kth.se/pierrelf/small-docker.git",
+    "git_ssh_url": "git@ssh.gitlab.cloud.cbh.kth.se:pierrelf/small-docker.git",
+    "visibility_level": 0
+  }
+}

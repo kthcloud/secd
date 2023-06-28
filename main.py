@@ -1,15 +1,17 @@
 from src import server, setup
+from src.logger import log
 
 if __name__ == '__main__':
     try:
-        print('Loading settings...')
+        log('Loading settings...')
         setup.load_settings()
 
-        print('Starting up...')
+        log("Starting up...")
         server.run()
     except KeyboardInterrupt:
         pass
     except Exception as e:
-        print(f'Error: {e}')
+        log(f'Error: {e}', "ERROR")
+
     finally:
-        print('Shutting down...')
+        log('Shutting down...')

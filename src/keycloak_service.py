@@ -1,8 +1,8 @@
 import keycloak
 
-from typing import Dict, List
+from typing import List
 from src.setup import get_settings
-
+from src.logger import log
 
 def _with_keycloak_client() -> keycloak.KeycloakAdmin:
     kcSettings = get_settings()['keycloak']
@@ -23,7 +23,7 @@ def get_keycloak_user_groups(keycloak_user_id: str) -> List[str]:
     try:
         groups = client.get_user_groups(keycloak_user_id)
     except keycloak.exceptions.KeycloakGetError as e:
-        print(f'User {keycloak_user_id} not found. Details: {e}')
+        log(f'User {keycloak_user_id} not found. Details: {e}', "ERROR")
         return None
 
     return groups

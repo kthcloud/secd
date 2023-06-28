@@ -1,4 +1,8 @@
 {
+    repoPath: {
+        type: "string",
+        required: true,
+    },
     gitlab: {
         type: "dict",
         schema: {
@@ -11,6 +15,14 @@
                 required: true,
             },
             secret: {
+                type: "string",
+                required: true,
+            },
+            username: {
+                type: "string",
+                required: true,
+            },
+            password: {
                 type: "string",
                 required: true,
             },
@@ -75,4 +87,13 @@
             }
         },
     },
+    k8s: {
+        type: "dict",
+        schema: {
+            configPath: {
+                type: "string",
+                required: true,
+            },
+        }
+    }
 }
