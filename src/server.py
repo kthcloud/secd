@@ -153,7 +153,7 @@ class HookResource:
                 # Run pod
                 k8s_service.create_namespace(keycloak_user_id, run_id, run_for)
                 k8s_service.create_persistent_volume(
-                    run_id, '/mnt/cloud/apps/sec/secure/repos')
+                    run_id, f'/mnt/cloud/apps/sec/secure/repos/{run_id}/outputs/{date}-{run_id}')
                 k8s_service.create_pod(run_id, image_name, {
                     "DB_USER": db_user,
                     "DB_PASS": db_pass,

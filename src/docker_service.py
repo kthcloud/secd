@@ -29,7 +29,7 @@ def push_and_remove_image(image_name):
     client = _with_docker()
     try:
         client.login(username=username, password=password, registry=url,
-                     dockercfg_path="/home/emil/kthcloud-secure/config/config.json")
+                     dockercfg_path="/home/pierrelf/kthcloud-secure-builds/config/config.json")
     except Exception as e:
         raise Exception(
             f"Error in login to registry {image_name}: {e}")

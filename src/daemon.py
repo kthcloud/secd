@@ -10,5 +10,6 @@ def run():
         for run_id in cleaned_run_ids:
             log(f"Finishing run {run_id} - expired rununtil - Pushing results")
             gitlab_service.push_results(run_id)
+            log(f"Finishing run {run_id} - Finished and cleaned up")
         
         time.sleep(60)

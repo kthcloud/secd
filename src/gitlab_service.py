@@ -3,6 +3,7 @@ import gitlab
 import yaml
 import datetime
 import shutil
+import subprocess
 
 from typing import Dict
 from git import Repo
@@ -137,11 +138,20 @@ def push_results(run_id: str):
     if not os.path.exists(repo_path):
         return
 
-    repo = Repo(repo_path)
-    repo.git.add(update=True)
-    repo.index.commit(commit_message)
-    origin = repo.remote(name='origin')
-    origin.push()
+    # print(subprocess.run("git config --global --add safe.directory '*'", check=True).stdout)
+    print(subprocess.run(["git", "add", "."], check=True).stdout)
+    print(subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True).stdout)
+    print(subprocess.run(["git", "push"], check=True).stdout)
+    
+    # repo = Repo(repo_path)
+    
+    #git config --global --add safe.directory '*'
+    # repo.git.config('--global', '--add', 'safe.directory', '*')
+    
+    # repo.index.add(['.'])
+    # repo.index.commit(commit_message)
+    
+    # origin = repo.remote('origin')
+    # origin.push()
 
-
-    shutil.rmtree(repo_path)
+    shutil.rmtree(repo_path, ignore_errors=True)
