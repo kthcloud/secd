@@ -139,9 +139,10 @@ def push_results(run_id: str):
         return
 
     # print(subprocess.run("git config --global --add safe.directory '*'", check=True).stdout)
-    print(subprocess.run(["git", "add", "."], check=True).stdout)
-    print(subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True).stdout)
-    print(subprocess.run(["git", "push"], check=True).stdout)
+    subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path)
+    subprocess.run(["git", "add", "."], check=True, cwd=repo_path)
+    subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path)
+    subprocess.run(["git", "push", "origin", f"outputs-{run_id}"], check=True, cwd=repo_path)
     
     # repo = Repo(repo_path)
     

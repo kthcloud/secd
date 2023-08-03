@@ -79,6 +79,14 @@ class HookResource:
                 title='Bad request',
                 description=f'Invalid body: {v.errors}'
             )
+        
+        # check if commit is from main branch
+        if body['ref'] != 'refs/heads/main':
+            log(f'Commit is not from main branch: {body["ref"]}')
+            raise falcon.HTTPBadRequest(
+                title='Bad request',
+                description=f'Commit is not from main branch: {body["ref"]}'
+            )
 
         log(f'found {len(body["commits"])} commits')
         for push_commit in body['commits']:
