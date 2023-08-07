@@ -8,7 +8,4 @@ def log(message: str, level: str = "INFO"):
     date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     output = f"[secd] [{level}] [{date}] {message}"
     
-    if level == "ERROR":
-        eprint(output)
-    else:
-        print(output)
+    eprint(output)
