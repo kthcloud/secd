@@ -63,7 +63,7 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str]):
                 ],
                 resources=client.V1ResourceRequirements(
                     limits={
-                        "nvidia.com/gpu": "1"
+                        "nvidia.com/gpu": 1
                     }
                 )
             )
