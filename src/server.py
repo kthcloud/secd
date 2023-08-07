@@ -79,7 +79,7 @@ class HookResource:
                 title='Bad request',
                 description=f'Invalid body: {v.errors}'
             )
-        
+
         # check if commit is from main branch
         if body['ref'] != 'refs/heads/main':
             log(f'Commit is not from main branch: {body["ref"]}')
@@ -116,7 +116,8 @@ class HookResource:
             try:
                 # Find keycloak user id
                 gitlab_user_id = body['user_id']
-                keycloak_user_id = gitlab_service.get_idp_user_id(gitlab_user_id)
+                keycloak_user_id = gitlab_service.get_idp_user_id(
+                    gitlab_user_id)
 
                 # fetch keycloak user groups
                 keycloak_groups = keycloak_service.get_keycloak_user_groups(
@@ -129,7 +130,8 @@ class HookResource:
                     if group['path'].startswith(prefix):
                         mysql_groups.append(group['path'][len(prefix):])
 
-                db_user, db_pass = mysql_service.create_mysql_user(mysql_groups)
+                db_user, db_pass = mysql_service.create_mysql_user(
+                    mysql_groups)
 
                 # Run ID
                 run_id = str(uuid.uuid4()).replace('-', '')
@@ -154,7 +156,8 @@ class HookResource:
                 docker_service.push_and_remove_image(image_name)
 
                 # Cleanup user's existing pods
-                deleted_run_ids = k8s_service.delete_by_user_id(keycloak_user_id)
+                deleted_run_ids = k8s_service.delete_by_user_id(
+                    keycloak_user_id)
                 for deleted_run_id in deleted_run_ids:
                     gitlab_service.push_results(deleted_run_id)
 
@@ -172,7 +175,6 @@ class HookResource:
                 log(str(e), "ERROR")
             else:
                 log(f"Successfully launched {run_id}")
-
 
         threading.Thread(target=create).start()
 
