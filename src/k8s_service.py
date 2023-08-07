@@ -60,7 +60,12 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str]):
                         name=f'vol-{run_id}-output',
                         mount_path='/output'
                     )
-                ]
+                ],
+                resources=client.V1ResourceRequirements(
+                    limits={
+                        "nvidia.com/gpu": "1"
+                    }
+                )
             )
         ]
     )
@@ -165,7 +170,6 @@ def cleanup_resources() -> List[str]:
                     name=f'{namespace.metadata.name}-output')
             except:
                 pass
-
 
             run_ids.append(run_id)
 
