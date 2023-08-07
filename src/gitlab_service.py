@@ -138,7 +138,7 @@ def push_results(run_id: str):
     if not os.path.exists(repo_path):
         return
 
-    subprocess.run(["git", "config", "--global", "--add", "safe.directory", "'*'"], check=True, cwd=repo_path)
+    # subprocess.run(["git", "config", "--global", "--add", "safe.directory", "'*'"], check=True, cwd=repo_path)
     subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path)
     subprocess.run(["git", "add", "."], check=True, cwd=repo_path)
     subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path)
