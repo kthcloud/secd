@@ -148,6 +148,7 @@ class HookResource:
                 # Get runfor
                 run_meta = gitlab_service.get_metadata(f"{repo_path}/secd.yml")
                 run_for = run_meta['runfor']
+                gpu = run_meta['gpu']
 
                 # Build image
                 reg_settings = get_settings()['registry']
@@ -170,7 +171,7 @@ class HookResource:
                     "DB_PASS": db_pass,
                     "DB_HOST": 'mysql.mysql.svc.cluster.local',
                     "OUTPUT_PATH": '/output',
-                })
+                }, gpu)
             except Exception as e:
                 log(str(e), "ERROR")
             else:

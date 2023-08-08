@@ -39,7 +39,8 @@ def has_file_in_repo(project_id: str, file_path: str, ref: str) -> bool:
 
 def get_metadata(file_path: str) -> Dict[str, any]:
     default = {
-        'runfor': 3
+        'runfor': 3,
+        'gpu': False
     }
 
     if not os.path.isfile(file_path):
@@ -60,6 +61,7 @@ def get_metadata(file_path: str) -> Dict[str, any]:
 
     validation = {
         'runfor': {'type': 'number'},
+        'gpu': {'type': 'boolean'},
     }
 
     v = Validator(validation)

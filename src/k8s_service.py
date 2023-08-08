@@ -29,12 +29,23 @@ def create_namespace(user_id: str, run_id: str, run_for: datetime):
     v1.create_namespace(body=namespace)
 
 
-def create_pod(run_id: str, image: str, envs: Dict[str, str]):
+def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
     v1 = _with_k8s()
 
     k8s_envs = []
     for env in envs:
         k8s_envs.append(client.V1EnvVar(name=env, value=envs[env]))
+
+    resources = client.V1ResourceRequirements()
+    if gpu:
+        resources = client.V1ResourceRequirements(
+            limits={
+                "nvidia.com/gpu": 1
+            },
+            requests={
+                "nvidia.com/gpu": 1
+            }
+        )
 
     # Create pod
     pod = client.V1Pod()
@@ -61,14 +72,7 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str]):
                         mount_path='/output'
                     )
                 ],
-                resources=client.V1ResourceRequirements(
-                    limits={
-                        "nvidia.com/gpu": 1
-                    },
-                    requests={
-                        "nvidia.com/gpu": 1
-                    }
-                )
+                resources=resources
             )
         ]
     )
