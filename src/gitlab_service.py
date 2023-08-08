@@ -139,10 +139,26 @@ def push_results(run_id: str):
         return
 
     # subprocess.run(["git", "config", "--global", "--add", "safe.directory", "'*'"], check=True, cwd=repo_path)
-    subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path)
-    subprocess.run(["git", "add", "."], check=True, cwd=repo_path)
-    subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path)
-    subprocess.run(["git", "push", "origin", f"outputs-{run_id}"], check=True, cwd=repo_path)
+    try:
+        subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path)
+    except Exception:
+        pass
+    
+    try:
+        subprocess.run(["git", "add", "."], check=True, cwd=repo_path)
+    except Exception:
+        pass
+    
+    try:
+        subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path)
+    except Exception:
+        pass
+    
+    try:
+        subprocess.run(["git", "push", "origin", f"outputs-{run_id}"], check=True, cwd=repo_path)
+    except Exception:
+        pass
+    
     
     # repo = Repo(repo_path)
     
