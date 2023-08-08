@@ -141,22 +141,22 @@ def push_results(run_id: str):
         return
 
     try:
-        subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path, stdout = subprocess.DEVNULL)
+        subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
     
     try:
-        subprocess.run(["git", "add", "."], check=True, cwd=repo_path, stdout = subprocess.DEVNULL)
+        subprocess.run(["git", "add", "."], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
     
     try:
-        subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path, stdout = subprocess.DEVNULL)
+        subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
     
     try:
-        subprocess.run(["git", "push", "origin", f"outputs-{run_id}"], check=True, cwd=repo_path, stdout = subprocess.DEVNULL)
+        subprocess.run(["git", "push", "origin", f"outputs-{run_id}"], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
     
