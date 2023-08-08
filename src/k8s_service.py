@@ -37,6 +37,8 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
         k8s_envs.append(client.V1EnvVar(name=env, value=envs[env]))
 
     resources = client.V1ResourceRequirements()
+
+    labels = {}
     if gpu:
         resources = client.V1ResourceRequirements(
             limits={
@@ -46,11 +48,13 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
                 "nvidia.com/gpu": 1
             }
         )
+        labels = {"gpu": "true"}
 
     # Create pod
     pod = client.V1Pod()
     pod.metadata = client.V1ObjectMeta(
         name=f"secd-{run_id}",
+        labels=labels
     )
     pod.spec = client.V1PodSpec(
         volumes=[
@@ -74,7 +78,7 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
                 ],
                 resources=resources
             )
-        ]
+        ],
     )
     v1.create_namespaced_pod(namespace=f"secd-{run_id}", body=pod)
 
