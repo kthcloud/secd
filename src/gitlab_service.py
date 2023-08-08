@@ -138,7 +138,6 @@ def push_results(run_id: str):
     if not os.path.exists(repo_path):
         return
 
-    # subprocess.run(["git", "config", "--global", "--add", "safe.directory", "'*'"], check=True, cwd=repo_path)
     try:
         subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path)
     except Exception:
@@ -159,16 +158,4 @@ def push_results(run_id: str):
     except Exception:
         pass
     
-    
-    # repo = Repo(repo_path)
-    
-    #git config --global --add safe.directory '*'
-    # repo.git.config('--global', '--add', 'safe.directory', '*')
-    
-    # repo.index.add(['.'])
-    # repo.index.commit(commit_message)
-    
-    # origin = repo.remote('origin')
-    # origin.push()
-
     shutil.rmtree(repo_path, ignore_errors=True)

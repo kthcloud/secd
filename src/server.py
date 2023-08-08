@@ -156,10 +156,10 @@ class HookResource:
                 docker_service.push_and_remove_image(image_name)
 
                 # Cleanup user's existing pods
-                deleted_run_ids = k8s_service.delete_by_user_id(
-                    keycloak_user_id)
-                for deleted_run_id in deleted_run_ids:
-                    gitlab_service.push_results(deleted_run_id)
+                # deleted_run_ids = k8s_service.delete_by_user_id(
+                #     keycloak_user_id)
+                # for deleted_run_id in deleted_run_ids:
+                #     gitlab_service.push_results(deleted_run_id)
 
                 # Run pod
                 k8s_service.create_namespace(keycloak_user_id, run_id, run_for)
