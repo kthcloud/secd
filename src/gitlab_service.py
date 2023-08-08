@@ -135,16 +135,13 @@ def push_results(run_id: str):
 
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     commit_message = f'secd: Inserting result of run {run_id} finished at {date}'
-    branch_name = f'output-{date.replace(":", "-").replace(" ", "-")}-{run_id}'
-
-    log(f'Pushing results of run {run_id} to branch {branch_name} in repo {repo_path}')
-
+    
     # check if repo_path exists
     if not os.path.exists(repo_path):
         return
 
     try:
-        subprocess.run(["git", "checkout", "-b", f"outputs-{branch_name}"], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "checkout", "-b", f"outputs-{run_id}"], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
     
