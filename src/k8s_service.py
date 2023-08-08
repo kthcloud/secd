@@ -164,9 +164,20 @@ def cleanup_resources() -> List[str]:
         if 'rununtil' not in annotations:
             continue
 
-        # Get rununtil annotation
+        # Check rununtil expiration
         rununtil = annotations.get('rununtil')
-        if datetime.datetime.fromisoformat(rununtil) < datetime.datetime.now():
+        expired = datetime.datetime.fromisoformat(rununtil) < datetime.datetime.now()
+
+        completed = False
+        # Check if pod is completed
+        pod = v1.list_namespaced_pod(namespace=namespace.metadata.name)
+        if len(pod.items) > 0:
+            pod = pod.items[0]
+            if pod.status.phase == 'Succeeded':
+                completed = True
+
+
+        if expired or completed:
             run_id = namespace.metadata.name.replace("secd-", "")
 
             log(f"Finishing run {namespace.metadata.name} - expired rununtil {rununtil} - Delete resources")
@@ -180,4 +191,5 @@ def cleanup_resources() -> List[str]:
 
             run_ids.append(run_id)
 
+        
     return run_ids
