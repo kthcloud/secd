@@ -12,4 +12,4 @@ def run():
             gitlab_service.push_results(run_id)
             log(f"Finishing run {run_id} - Finished and cleaned up")
         
-        time.sleep(60)
+        time.sleep(5)
