@@ -79,6 +79,7 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
                 resources=resources
             )
         ],
+        restart_policy="Never"
     )
     v1.create_namespaced_pod(namespace=f"secd-{run_id}", body=pod)
 
