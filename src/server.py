@@ -95,7 +95,7 @@ class HookResource:
                 description=f'Commit is not from main branch: {body["ref"]}'
             )
 
-        log(f'found {len(body["commits"])} commits - {body["project"]["path_with_namespace"]}')
+        log(f'Found {len(body["commits"])} commits - {body["project"]["path_with_namespace"]}')
         for push_commit in body['commits']:
 
             signature = gitlab_service.get_signature(
