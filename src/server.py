@@ -52,6 +52,7 @@ class HookResource:
             )
 
         validation = {
+            'event_name': {'type': 'string'},
             'ref': {'type': 'string'},
             'user_id': {'type': 'integer'},
             'project_id': {'type': 'integer'},
@@ -78,6 +79,12 @@ class HookResource:
             raise falcon.HTTPBadRequest(
                 title='Bad request',
                 description=f'Invalid body: {v.errors}'
+            )
+
+        if body['event_name'] != 'push':
+            raise falcon.HTTPBadRequest(
+                title='Bad request',
+                description=f'Invalid event_name: {body["event_name"]}'
             )
 
         # check if commit is from main branch
