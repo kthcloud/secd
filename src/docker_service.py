@@ -9,7 +9,7 @@ def _with_docker():
 
 
 def build_image(repo_path, image_name):
-    log(f"Building image {image_name}")
+    log(f"Building image {image_name} at {repo_path}")
     client = _with_docker()
     try:
         client.images.build(path=repo_path, tag=image_name)
@@ -28,8 +28,7 @@ def push_and_remove_image(image_name):
 
     client = _with_docker()
     try:
-        client.login(username=username, password=password, registry=url,
-                     dockercfg_path="/home/pierrelf/kthcloud-secure-builds/config/config.json")
+        client.login(username=username, password=password, registry=url)
     except Exception as e:
         raise Exception(
             f"Error in login to registry {image_name}: {e}")
