@@ -95,7 +95,7 @@ def create_persistent_volume(run_id: str, path: str):
         capacity={"storage": "50Gi"},
         nfs=client.V1NFSVolumeSource(
             path=path,
-            server='172.31.5.11'
+            server='nfs.secd'
         ),
         storage_class_name="nfs",
         persistent_volume_reclaim_policy="Retain",
