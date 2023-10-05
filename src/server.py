@@ -52,6 +52,7 @@ class HookResource:
             )
 
         validation = {
+            'event_name': {'type': 'string'},
             'ref': {'type': 'string'},
             'user_id': {'type': 'integer'},
             'project_id': {'type': 'integer'},
@@ -80,6 +81,12 @@ class HookResource:
                 description=f'Invalid body: {v.errors}'
             )
 
+        if body['event_name'] != 'push':
+            raise falcon.HTTPBadRequest(
+                title='Bad request',
+                description=f'Invalid event_name: {body["event_name"]}'
+            )
+
         # check if commit is from main branch
         if body['ref'] != 'refs/heads/main':
             log(f'Commit is not from main branch: {body["ref"]}')
@@ -88,7 +95,7 @@ class HookResource:
                 description=f'Commit is not from main branch: {body["ref"]}'
             )
 
-        log(f'found {len(body["commits"])} commits - {body["project"]["path_with_namespace"]}')
+        log(f'Found {len(body["commits"])} commits - {body["project"]["path_with_namespace"]}')
         for push_commit in body['commits']:
 
             signature = gitlab_service.get_signature(

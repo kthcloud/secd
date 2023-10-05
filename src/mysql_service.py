@@ -34,8 +34,9 @@ def create_mysql_user(groups: List[str]):
         cursor.execute(f"grant select on build_test.* to '{group}';")
         cursor.execute(f"grant '{group}' to '{db_user}';")
 
-    cursor.execute(
-        f"alter user '{db_user}' default role {', '.join(groups)};")
+    if len (groups) > 0:
+        cursor.execute(
+            f"alter user '{db_user}' default role {', '.join(groups)};")
     
     return db_user, db_pass
 
