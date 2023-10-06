@@ -163,37 +163,46 @@ class HookResource:
                 docker_service.build_image(repo_path, image_name)
                 docker_service.push_and_remove_image(image_name)
 
-                # Cleanup user's existing pods
-                # deleted_run_ids = k8s_service.delete_by_user_id(
-                #     keycloak_user_id)
-                # for deleted_run_id in deleted_run_ids:
-                #     gitlab_service.push_results(deleted_run_id)
-
-                # Run pod
+                # Create namespace and output volume
                 pvc_repo_path = get_settings()['k8s']['pvcPath']
                 k8s_service.create_namespace(keycloak_user_id, run_id, run_for)
                 k8s_service.create_persistent_volume(
                     run_id, f'{pvc_repo_path}/repos/{run_id}/outputs/{date}-{run_id}')
 
-                # Check if cache_dir exists, then mount the same cache dir to pod
+                # Check if cache_dir exists, then create the cache volume and mount the mount_path
                 cache_dir = None
+                mount_path = None
                 if "cache_dir" in run_meta and run_meta["cache_dir"]:
+                    # Default mount_path inside container
+                    mount_path = '/cache'
+                    
+                    # Find and fetch custom mount_path if specified
+                    if "mount_path" in run_meta and run_meta["mount_path"]:
+                        mount_path = run_meta['mount_path']
+                        log(f"Found custom mount_path: {mount_path}")
+                    
+                    # Fetch cache_dir
                     cache_dir = run_meta['cache_dir']
                     cache_path = f"{get_settings()['path']['cachePath']}/{keycloak_user_id}/{cache_dir}"
                     log(f"Found cache_dir: {cache_path}")
-                                        
+
+                    # Create cache_dir if not exists
                     if not os.path.exists(cache_path):
                         os.makedirs(cache_path)
 
+                    # Create PVC for cache_dir
                     k8s_service.create_persistent_volume(
                         run_id, f'{pvc_repo_path}/cache/{keycloak_user_id}/{cache_dir}', "cache")
-
+                
+                # Create pod
                 k8s_service.create_pod(run_id, image_name, {
                     "DB_USER": db_user,
                     "DB_PASS": db_pass,
                     "DB_HOST": 'mysql.mysql.svc.cluster.local',
                     "OUTPUT_PATH": '/output',
-                }, gpu, cache_dir)
+                    "SECD": 'PRODUCTION'
+                }, gpu, mount_path)
+
             except Exception as e:
                 log(str(e), "ERROR")
             else:

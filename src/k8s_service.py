@@ -29,7 +29,7 @@ def create_namespace(user_id: str, run_id: str, run_for: datetime):
     v1.create_namespace(body=namespace)
 
 
-def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
+def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, mount_path):
     v1 = _with_k8s()
 
     k8s_envs = []
@@ -70,7 +70,7 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
         mount_path='/output'
     )]
 
-    if cache_dir:
+    if mount_path:
         volumes.append(
             client.V1Volume(
                 name=f'vol-{run_id}-cache',
@@ -82,7 +82,7 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
         volume_mounts.append(
             client.V1VolumeMount(
                 name=f'vol-{run_id}-cache',
-                mount_path=cache_dir
+                mount_path=mount_path
             )
         )
 
