@@ -1,99 +1,56 @@
 {
-    repoPath: {
-        type: "string",
-        required: true,
-    },
-    gitlab: {
-        type: "dict",
-        schema: {
-            url: {
-                type: "string",
-                required: true,
-            },
-            token: {
-                type: "string",
-                required: true,
-            },
-            secret: {
-                type: "string",
-                required: true,
-            },
-            username: {
-                type: "string",
-                required: true,
-            },
-            password: {
-                type: "string",
-                required: true,
-            },
+    repoPath: { type: "string", required: true },
+    gitlab:
+        {
+            type: "dict",
+            schema:
+                {
+                    url: { type: "string", required: true },
+                    token: { type: "string", required: true },
+                    secret: { type: "string", required: true },
+                    username: { type: "string", required: true },
+                    password: { type: "string", required: true },
+                },
         },
-    },
-    keycloak: {
-        type: "dict",
-        schema: {
-            url: {
-                type: "string",
-                required: true,
-            },
-            realm: {
-                type: "string",
-                required: true,
-            },
-            username: {
-                type: "string",
-                required: true,
-            },
-            password: {
-                type: "string",
-                required: true,
-            },
+    keycloak:
+        {
+            type: "dict",
+            schema:
+                {
+                    url: { type: "string", required: true },
+                    realm: { type: "string", required: true },
+                    username: { type: "string", required: true },
+                    password: { type: "string", required: true },
+                },
         },
-    },
-    db: {
-        type: "dict",
-        schema: {
-            host: {
-                type: "string",
-                required: true,
-            },
-            username: {
-                type: "string",
-                required: true,
-            },
-            password: {
-                type: "string",
-                required: true,
-            }
+    db:
+        {
+            type: "dict",
+            schema:
+                {
+                    host: { type: "string", required: true },
+                    username: { type: "string", required: true },
+                    password: { type: "string", required: true },
+                },
         },
-    },
-    registry: {
-        type: "dict",
-        schema: {
-            url: {
-                type: "string",
-                required: true,
-            },
-            project: {
-                type: "string",
-                required: true,
-            },
-            username: {
-                type: "string",
-                required: true,
-            },
-            password: {
-                type: "string",
-                required: true,
-            }
+    registry:
+        {
+            type: "dict",
+            schema:
+                {
+                    url: { type: "string", required: true },
+                    project: { type: "string", required: true },
+                    username: { type: "string", required: true },
+                    password: { type: "string", required: true },
+                },
         },
-    },
-    k8s: {
-        type: "dict",
-        schema: {
-            configPath: {
-                type: "string",
-                required: true,
-            },
-        }
-    }
+    k8s:
+        {
+            type: "dict",
+            schema:
+                {
+                    configPath: { type: "string", required: true },
+                    pvcPath: { type: "string", required: true },
+                },
+        },
 }
