@@ -1,5 +1,12 @@
 {
-    repoPath: { type: "string", required: true },
+    path:
+        {
+            type: "dict",
+            {
+                repoPath: { type: "string", required: true },
+                cachePath: { type: "string", required: true },
+            },
+        },
     gitlab:
         {
             type: "dict",

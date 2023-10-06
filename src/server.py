@@ -144,7 +144,7 @@ class HookResource:
                 run_id = str(uuid.uuid4()).replace('-', '')
 
                 # Clone repo
-                repo_path = f"{get_settings()['repoPath']}/{run_id}"
+                repo_path = f"{get_settings()['path']['repoPath']}/{run_id}"
                 gitlab_service.clone(body["project"]["http_url"], repo_path)
 
                 # Create an output folder for the run
@@ -180,6 +180,9 @@ class HookResource:
                 if "cache_dir" in run_meta and run_meta["cache_dir"]:
                     log(f"Found cache_dir: {run_meta['cache_dir']}")
                     cache_dir = run_meta['cache_dir']
+
+                    cache_path = f"{get_settings()['path']['cachePath']}/{keycloak_user_id}"
+                    os.makedirs(f'{cache_path}')
                     k8s_service.create_persistent_volume(
                         run_id, f'{pvc_repo_path}/cache/{keycloak_user_id}/{cache_dir}', "cache")
 
