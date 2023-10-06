@@ -176,8 +176,9 @@ class HookResource:
                     run_id, f'{pvc_repo_path}/{run_id}/outputs/{date}-{run_id}')
 
                 # Check if cache_dir exists, then mount the same cache dir to pod
-                cache_dir = run_meta['cache_dir']
-                if cache_dir:
+                cache_dir = None
+                if "cache_dir" in run_meta and run_meta["cache_dir"]:
+                    cache_dir = run_meta['cache_dir']
                     k8s_service.create_persistent_volume(
                         run_id, f'{pvc_repo_path}/{run_id}/cache/{cache_dir}', "cache")
 
