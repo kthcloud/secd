@@ -30,6 +30,8 @@ def create_namespace(user_id: str, run_id: str, run_for: datetime):
 
 
 def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
+    cache_dir and log(f"k8s using cache_dir: {cache_dir}")
+
     v1 = _with_k8s()
 
     k8s_envs = []
@@ -56,36 +58,44 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
         name=f"secd-{run_id}",
         labels=labels
     )
-    pod.spec = client.V1PodSpec(
-        volumes=[
+
+    volumes = [
+        client.V1Volume(
+            name=f'vol-{run_id}-output',
+            persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
+                claim_name=f'secd-pvc-{run_id}-output'
+            )
+        )]
+
+    volume_mounts = [client.V1VolumeMount(
+        name=f'vol-{run_id}-output',
+        mount_path='/output'
+    )]
+
+    if cache_dir:
+        volumes.append(
             client.V1Volume(
-                name=f'vol-{run_id}-output',
-                persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
-                    claim_name=f'secd-pvc-{run_id}-output'
-                )
-            ),
-            cache_dir and client.V1Volume(
                 name=f'vol-{run_id}-cache',
                 persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
                     claim_name=f'secd-pvc-{run_id}-cache'
                 )
             )
-        ],
+        )
+        volume_mounts.append(
+            client.V1VolumeMount(
+                name=f'vol-{run_id}-cache',
+                mount_path=cache_dir
+            )
+        )
+
+    pod.spec = client.V1PodSpec(
+        volumes=volumes,
         containers=[
             client.V1Container(
                 name=f"secd-{run_id}",
                 image=image,
                 env=k8s_envs,
-                volume_mounts=[
-                    client.V1VolumeMount(
-                        name=f'vol-{run_id}-output',
-                        mount_path='/output'
-                    ),
-                    cache_dir and client.V1VolumeMount(
-                        name=f'vol-{run_id}-cache',
-                        mount_path=cache_dir
-                    )
-                ],
+                volume_mounts=volume_mounts,
                 resources=resources
             )
         ],
