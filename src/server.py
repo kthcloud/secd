@@ -181,7 +181,7 @@ class HookResource:
                     log(f"Found cache_dir: {run_meta['cache_dir']}")
                     cache_dir = run_meta['cache_dir']
 
-                    cache_path = f"{get_settings()['path']['cachePath']}/{keycloak_user_id}"
+                    cache_path = f"{get_settings()['path']['cachePath']}/{keycloak_user_id}/{cache_dir}"
                     os.makedirs(f'{cache_path}')
                     k8s_service.create_persistent_volume(
                         run_id, f'{pvc_repo_path}/cache/{keycloak_user_id}/{cache_dir}', "cache")
