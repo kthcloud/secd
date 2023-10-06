@@ -173,7 +173,7 @@ class HookResource:
                 pvc_repo_path = get_settings()['k8s']['pvcPath']
                 k8s_service.create_namespace(keycloak_user_id, run_id, run_for)
                 k8s_service.create_persistent_volume(
-                    run_id, f'{pvc_repo_path}/{run_id}/outputs/{date}-{run_id}')
+                    run_id, f'{pvc_repo_path}/repos/{run_id}/outputs/{date}-{run_id}')
 
                 # Check if cache_dir exists, then mount the same cache dir to pod
                 cache_dir = None
@@ -181,7 +181,7 @@ class HookResource:
                     log(f"Found cache_dir: {run_meta['cache_dir']}")
                     cache_dir = run_meta['cache_dir']
                     k8s_service.create_persistent_volume(
-                        run_id, f'{pvc_repo_path}/{run_id}/cache/{cache_dir}', "cache")
+                        run_id, f'{pvc_repo_path}/cache/{keycloak_user_id}/{cache_dir}', "cache")
 
                 k8s_service.create_pod(run_id, image_name, {
                     "DB_USER": db_user,
