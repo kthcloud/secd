@@ -2,6 +2,7 @@
     path:
         {
             type: "dict",
+            schema:
             {
                 repoPath: { type: "string", required: true },
                 cachePath: { type: "string", required: true },
