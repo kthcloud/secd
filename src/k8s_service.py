@@ -30,8 +30,6 @@ def create_namespace(user_id: str, run_id: str, run_for: datetime):
 
 
 def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
-    cache_dir and log(f"k8s using cache_dir: {cache_dir}")
-
     v1 = _with_k8s()
 
     k8s_envs = []
