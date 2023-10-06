@@ -133,7 +133,7 @@ def clone(gitlab_url: str, repo_path: str):
 
 
 def push_results(run_id: str):
-    repo_path = f"{get_settings()['repoPath']}/{run_id}"
+    repo_path = f"{get_settings()['path']['repoPath']}/{run_id}"
 
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     commit_message = f'secd: Inserting result of run {run_id} finished at {date}'
