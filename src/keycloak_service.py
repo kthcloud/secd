@@ -4,6 +4,7 @@ from typing import List
 from src.setup import get_settings
 from src.logger import log
 
+
 def _with_keycloak_client() -> keycloak.KeycloakAdmin:
     kcSettings = get_settings()['keycloak']
     client = keycloak.KeycloakAdmin(

@@ -5,6 +5,7 @@ import uuid
 from typing import List
 from src.setup import get_settings
 
+
 def _with_mysql_client() -> mysql.connector.MySQLConnection:
     msqlSettings = get_settings()['db']
     client = mysql.connector.connect(
@@ -16,7 +17,6 @@ def _with_mysql_client() -> mysql.connector.MySQLConnection:
     return client
 
 
-
 def create_mysql_user(groups: List[str]):
     client = _with_mysql_client()
     cursor = client.cursor()
@@ -24,7 +24,7 @@ def create_mysql_user(groups: List[str]):
     # Create user
     db_user = str(uuid.uuid4()).replace('-', '')
     db_pass = str(uuid.uuid4()).replace('-', '')
-    
+
     cursor.execute(f"drop user if exists '{db_user}';")
     cursor.execute(f"create user '{db_user}' identified by '{db_pass}';")
 
@@ -34,10 +34,10 @@ def create_mysql_user(groups: List[str]):
         cursor.execute(f"grant select on build_test.* to '{group}';")
         cursor.execute(f"grant '{group}' to '{db_user}';")
 
-    if len (groups) > 0:
+    if len(groups) > 0:
         cursor.execute(
             f"alter user '{db_user}' default role {', '.join(groups)};")
-    
+
     return db_user, db_pass
 
 

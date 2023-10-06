@@ -11,6 +11,7 @@ from cerberus import Validator
 from src.setup import get_settings
 from src.logger import log
 
+
 def _with_gitlab_client() -> gitlab.Gitlab:
     glSettings = get_settings()['gitlab']
     client = gitlab.Gitlab(
@@ -130,6 +131,7 @@ def clone(gitlab_url: str, repo_path: str):
         "https://", f"https://{gl_settings['username']}:{gl_settings['password']}@")
     Repo.clone_from(gitlab_repo_url, repo_path)
 
+
 def push_results(run_id: str):
     repo_path = f"{get_settings()['repoPath']}/{run_id}"
 
@@ -143,23 +145,27 @@ def push_results(run_id: str):
         return
 
     try:
-        subprocess.run(["git", "checkout", "-b", branch_name], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "checkout", "-b", branch_name], check=True,
+                       cwd=repo_path, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
-    
+
     try:
-        subprocess.run(["git", "add", "."], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "add", "."], check=True, cwd=repo_path,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
-    
+
     try:
-        subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "commit", "-m", f'"{commit_message}"'], check=True,
+                       cwd=repo_path, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
-    
+
     try:
-        subprocess.run(["git", "push", "origin", branch_name], check=True, cwd=repo_path, stdout = subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "push", "origin", branch_name], check=True,
+                       cwd=repo_path, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
-    
+
     shutil.rmtree(repo_path, ignore_errors=True)

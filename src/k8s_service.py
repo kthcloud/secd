@@ -29,7 +29,7 @@ def create_namespace(user_id: str, run_id: str, run_for: datetime):
     v1.create_namespace(body=namespace)
 
 
-def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
+def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu, cache_dir):
     v1 = _with_k8s()
 
     k8s_envs = []
@@ -63,6 +63,12 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
                 persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
                     claim_name=f'secd-pvc-{run_id}-output'
                 )
+            ),
+            cache_dir and client.V1Volume(
+                name=f'vol-{run_id}-cache',
+                persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
+                    claim_name=f'secd-pvc-{run_id}-cache'
+                )
             )
         ],
         containers=[
@@ -74,6 +80,10 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
                     client.V1VolumeMount(
                         name=f'vol-{run_id}-output',
                         mount_path='/output'
+                    ),
+                    cache_dir and client.V1VolumeMount(
+                        name=f'vol-{run_id}-cache',
+                        mount_path=cache_dir
                     )
                 ],
                 resources=resources
@@ -84,12 +94,12 @@ def create_pod(run_id: str, image: str, envs: Dict[str, str], gpu):
     v1.create_namespaced_pod(namespace=f"secd-{run_id}", body=pod)
 
 
-def create_persistent_volume(run_id: str, path: str):
+def create_persistent_volume(run_id: str, path: str, type: str = "output"):
     v1 = _with_k8s()
 
     # Create persistent volume
     pv = client.V1PersistentVolume()
-    pv.metadata = client.V1ObjectMeta(name=f'secd-{run_id}-output')
+    pv.metadata = client.V1ObjectMeta(name=f'secd-{run_id}-{type}')
     pv.spec = client.V1PersistentVolumeSpec(
         access_modes=["ReadWriteOnce"],
         capacity={"storage": "50Gi"},
@@ -106,14 +116,14 @@ def create_persistent_volume(run_id: str, path: str):
 
     # Create persistent volume claim
     pvc = client.V1PersistentVolumeClaim()
-    pvc.metadata = client.V1ObjectMeta(name=f'secd-pvc-{run_id}-output')
+    pvc.metadata = client.V1ObjectMeta(name=f'secd-pvc-{run_id}-{type}')
     pvc.spec = client.V1PersistentVolumeClaimSpec(
         access_modes=["ReadWriteOnce"],
         resources=client.V1ResourceRequirements(
             requests={"storage": "50Gi"}
         ),
         storage_class_name="nfs",
-        volume_name=f'secd-{run_id}-output',
+        volume_name=f'secd-{run_id}-{type}',
         volume_mode="Filesystem"
     )
 
@@ -171,7 +181,8 @@ def cleanup_resources() -> List[str]:
 
         # Check rununtil expiration
         rununtil = annotations.get('rununtil')
-        expired = datetime.datetime.fromisoformat(rununtil) < datetime.datetime.now()
+        expired = datetime.datetime.fromisoformat(
+            rununtil) < datetime.datetime.now()
 
         completed = False
         # Check if pod is completed
@@ -180,7 +191,6 @@ def cleanup_resources() -> List[str]:
             pod = pod.items[0]
             if pod.status.phase == 'Succeeded':
                 completed = True
-
 
         if expired or completed:
             run_id = namespace.metadata.name.replace("secd-", "")
@@ -196,5 +206,4 @@ def cleanup_resources() -> List[str]:
 
             run_ids.append(run_id)
 
-        
     return run_ids
