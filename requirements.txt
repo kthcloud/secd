@@ -6,3 +6,5 @@ mysql-connector-python
 kubernetes
 docker
 git-python
+pytest
+python-dotenv
